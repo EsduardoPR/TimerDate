@@ -1,0 +1,97 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+section{
+    margin-top: -2%;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+h2{
+    font-size: 5em;
+    font-family: "Gafata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: auto;
+    font-family: "Gafata", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 10em;
+}
+.flip {
+    display: inline-block;
+    perspective: 1000px;
+    margin: 0 5px;
+    display: block;
+    width: 1em;
+    height: 1.5em;
+    background: #929292;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.5em;
+    position: relative;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+.flip2{
+    display: inline-block;
+    perspective: 1000px;
+    margin: 0 5px;
+    display: block;
+    width: 1em;
+    height: 1.5em;
+    background: #929292;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 1.5em;
+    position: absolute;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+.flip2.solo{
+    background-color: aqua;
+    position: absolute;
+    margin-top: -6.4%;
+    height: 120px; /* Altura que corresponde a la mitad superior */
+    overflow: hidden;
+    background-color: lightblue;
+}
+.juntar{
+    margin-left: 5%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flip.flip-animate{
+    animation: flipBottom .5s forwards;
+}
+.flip2.flip-animate{
+    animation: flipBotton .5s forwards;
+}
+
+@keyframes flipBottom {
+    0% {
+        transform: rotateX(180deg);
+    }
+    100% {
+        transform: rotateX(0deg);
+    }
+}

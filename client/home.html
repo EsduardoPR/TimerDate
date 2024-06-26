@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RELOJ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gafata&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <section>
+        <h2>RELOJ</h2>
+        <div class="container">
+            <div class="flip" id="hour1">1</div>
+            <div class="flip" id="hour2">2</div>:
+            <div class="flip" id="minute1">3</div>
+            <div class="flip" id="minute2">4</div>:
+            <div class="flip" id="second1">5</div>
+            <div class="flip" id="second2">0</div>
+        </div>
+
+    </section>
+    
+   
+    <script>
+        const hour1 = document.getElementById("hour1");
+        const hour2 = document.getElementById("hour2");
+        const minute1 = document.getElementById("minute1");
+        const minute2 = document.getElementById("minute2");
+        const second1 = document.getElementById("second1");
+        const second2 = document.getElementById("second2");
+        
+        const Hour = new EventSource("http://localhost:9000/Hour");
+        const Minute = new EventSource("http://localhost:9000/Minute");
+        const Second = new EventSource("http://localhost:9000/Seg");
+
+        function updateDigit(element, value) {
+            const newDigit = value.toString();
+            if (element.textContent !== newDigit) {
+                element.classList.remove('flip-animate');
+                void element.offsetWidth;
+                element.textContent = newDigit;
+                element.classList.add('flip-animate');
+            }
+        }
+
+    
+        Hour.addEventListener("Hour", function(event) {
+            const hourString = JSON.parse(event.data).toString().padStart(2, '0');
+            updateDigit(hour1, hourString[0]);
+            updateDigit(hour2, hourString[1]);
+        });
+        Minute.addEventListener("Minute", function(event) {
+            const minuteString = JSON.parse(event.data).toString().padStart(2, '0');
+            updateDigit(minute1, minuteString[0]);
+            updateDigit(minute2, minuteString[1]);
+        });
+
+        Second.addEventListener("Second", function(event) {
+            const secondString = JSON.parse(event.data).toString().padStart(2, '0');
+            updateDigit(second1, secondString[0]);
+            updateDigit(second2, secondString[1]);
+        });
+    
+    </script>
+</body>
+</html>
